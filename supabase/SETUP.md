@@ -16,31 +16,25 @@ Lo que tú haces: crear la cuenta y el proyecto (yo no puedo hacerlo por ti). El
    - **Plan:** Free.
 3. Pulsa **Create** y espera ~2 min a que el proyecto arranque.
 
-## 2. Aplicar el esquema (tablas + seguridad)
+## 2. Aplicar el esquema (crear las tablas y la seguridad)
 
-**Opción A — SQL Editor (lo más simple):**
-En el panel, menú lateral → **SQL Editor** → **New query**. Pega y ejecuta **en este orden**,
-uno por uno (el contenido está en `supabase/migrations/`):
+Este paso **crea todas las tablas y las reglas de seguridad** dentro de tu base de datos.
+Lo he dejado en **un solo archivo** para que lo pegues de una vez. Es la forma más fácil:
 
-1. `0001_core.sql`
-2. `0002_catalogo.sql`
-3. `0003_recetas.sql`
-4. `0004_eventos.sql`
-5. `0005_operacion.sql`
-6. `0006_documentos.sql`
-7. `0007_rls_policies.sql`
+1. En tu ordenador, abre la carpeta `maymanta-os/supabase/` y busca el archivo **`all_in_one.sql`**.
+2. Ábrelo con el **Bloc de notas** (clic derecho → *Abrir con* → *Bloc de notas*) o con VS Code.
+3. Selecciona **todo** el contenido (`Ctrl + A`) y cópialo (`Ctrl + C`).
+4. En el panel de Supabase: menú lateral → **SQL Editor** → **New query**.
+5. Pega (`Ctrl + V`) en el recuadro grande y pulsa **Run** (abajo a la derecha, o `Ctrl + Enter`).
+6. Espera unos segundos. Si todo va bien, verás **"Success"** sin errores. ✅
 
-Luego el seed (sedes, roles, permisos, reglas): pega y ejecuta `seed.sql`.
+> ¿Qué contiene ese archivo? Las 7 migraciones (`migrations/0001…0007`) + el `seed` (sedes,
+> roles, permisos y reglas), ya en el orden correcto. No tienes que tocar nada.
 
-**Opción B — CLI** (si instalas la Supabase CLI):
-```bash
-supabase link --project-ref <tu-ref>
-supabase db push
-psql "<CONNECTION_STRING>" -f supabase/seed.sql
-```
+> **Si sale un error en rojo:** cópiamelo tal cual y lo arreglo al momento. Es la primera vez
+> que este SQL corre contra una base de datos real, así que puede necesitar un retoque.
 
-> Si algún paso da error, cópiame el mensaje y lo corrijo: el esquema está escrito pero
-> aún no probado contra una base de datos real (esta es su primera ejecución).
+*(Alternativa para técnicos — Supabase CLI: `supabase db push` con las migraciones + `psql … -f seed.sql`.)*
 
 ## 3. Crear tu usuario admin
 
