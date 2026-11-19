@@ -1,14 +1,11 @@
 -- =====================================================
 -- MAYMANTA OS - TODO EN UNO (re-ejecutable)
 -- Pega este archivo completo en el SQL Editor de Supabase y pulsa RUN.
--- Incluye: limpieza + 7 migraciones (en orden) + seed.
+-- Incluye: limpieza + migraciones (en orden) + grants + seed.
 -- Generado automaticamente; no editar a mano.
 -- =====================================================
 
 -- >>>>>>>>>> LIMPIEZA (idempotente) >>>>>>>>>>
--- Borra las tablas MAYMANTA si ya existen, para poder re-ejecutar sin el error
--- "already exists". OJO: borra los datos de estas tablas. Mientras no haya datos
--- reales cargados es totalmente seguro. (Quitar este bloque cuando haya datos.)
 drop table if exists
   public.audit_logs, public.approvals, public.documents, public.food_cost_periods,
   public.sales, public.abc_classification, public.kardex_movements, public.inventory_lines,
@@ -742,6 +739,28 @@ begin
                     for each row execute function public.tg_audit();', t);
   end loop;
 end $$;
+
+
+-- >>>>>>>>>> migrations/0008_grants.sql >>>>>>>>>>
+
+-- ============================================================
+-- MAYMANTA OS · 0008 grants
+-- Permisos base de acceso a las tablas para los roles del API de Supabase
+-- (anon = no logueado, authenticated = logueado). La seguridad REAL la hace
+-- RLS fila a fila (migración 0007); estos GRANT solo permiten tocar la tabla.
+-- Sin esto, la API responde "permission denied for table ...".
+-- ============================================================
+
+grant usage on schema public to anon, authenticated;
+
+grant select, insert, update, delete on all tables in schema public to anon, authenticated;
+grant usage, select on all sequences in schema public to anon, authenticated;
+grant execute on all functions in schema public to anon, authenticated;
+
+-- Para las tablas/secuencias que se creen en el futuro
+alter default privileges in schema public grant select, insert, update, delete on tables to anon, authenticated;
+alter default privileges in schema public grant usage, select on sequences to anon, authenticated;
+alter default privileges in schema public grant execute on functions to anon, authenticated;
 
 
 -- >>>>>>>>>> seed.sql >>>>>>>>>>
