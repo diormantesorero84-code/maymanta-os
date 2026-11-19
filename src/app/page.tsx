@@ -8,7 +8,13 @@ import { EVENTOS_DEMO, KPIS_DEMO, badgeClass } from "@/lib/demo";
 export default function Dashboard() {
   const { sede } = useSede();
   const k = KPIS_DEMO[sede];
-  const proximos = EVENTOS_DEMO.filter((e) => e.sede === sede && e.estado !== "ARCHIVADO");
+  const delaSede = EVENTOS_DEMO.filter((e) => e.sede === sede);
+  const proximos = delaSede.filter((e) => e.estado !== "ARCHIVADO");
+
+  const alertas = [
+    ...delaSede.filter((e) => e.estado === "EN_APROBACION").map((e) => ({ tipo: "info" as const, txt: `${e.id} · ${e.cliente} espera aprobación`, tag: "Aprobar" })),
+    ...delaSede.filter((e) => e.faltantes > 0).map((e) => ({ tipo: "warn" as const, txt: `${e.id} · ${e.cliente}: ${e.faltantes} dato(s) faltante(s) bloquean el cálculo`, tag: "Revisar" })),
+  ];
 
   return (
     <>
@@ -21,6 +27,23 @@ export default function Dashboard() {
         <div className="card"><div className="k">Pend. aprobación</div><div className="v">{k.pendAprob}</div><div className="d">requieren tu OK</div></div>
         <div className="card"><div className="k">%FC teórico</div><div className="v">{k.fcTeorico}</div><div className="d">periodo actual</div></div>
         <div className="card"><div className="k">Compras del mes</div><div className="v">{k.comprasMes}</div><div className="d">acumulado</div></div>
+      </div>
+
+      <div className="panel">
+        <h3>Alertas</h3>
+        {alertas.length ? (
+          <div className="alerts">
+            {alertas.map((a, i) => (
+              <div key={i} className={`alert ${a.tipo}`}>
+                <span>{a.tipo === "warn" ? "⚠️" : "🔔"}</span>
+                {a.txt}
+                <span className="tag">{a.tag}</span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="empty">Sin alertas en esta sede.</div>
+        )}
       </div>
 
       <div className="panel">
@@ -37,7 +60,7 @@ export default function Dashboard() {
                 <td><span className={`badge ${badgeClass(e.estado)}`}>{e.estado}</span></td>
               </tr>
             ))}
-            {proximos.length === 0 && <tr><td colSpan={5} style={{ color: "var(--muted)" }}>Sin eventos abiertos en esta sede.</td></tr>}
+            {proximos.length === 0 && <tr><td colSpan={5} className="muted">Sin eventos abiertos en esta sede.</td></tr>}
           </tbody>
         </table>
       </div>

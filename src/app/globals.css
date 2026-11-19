@@ -106,3 +106,63 @@ tbody tr:hover{background:var(--surface-2)}
   .content{padding:16px}
 }
 .menu-btn{display:none;border:1px solid var(--border);background:var(--surface-2);border-radius:9px;padding:7px 10px;cursor:pointer;color:var(--fg)}
+
+/* ===== Pestañas ===== */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--sep);margin:18px 0 0}
+.tabs button{border:0;background:transparent;color:var(--muted);font-size:14px;font-weight:600;padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button.on{color:var(--accent);border-bottom-color:var(--accent)}
+.tab-pane{margin-top:0}
+
+/* ===== Chips de filtro ===== */
+.filters{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:14px}
+.chip{border:1px solid var(--border);background:var(--surface);color:var(--muted);font-size:12px;font-weight:600;padding:6px 11px;border-radius:999px;cursor:pointer}
+.chip.on{background:var(--accent-bg);color:var(--accent);border-color:transparent}
+.count{color:var(--muted);font-size:13px;margin-left:auto}
+
+/* ===== Cell helpers ===== */
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--muted)}
+.pill.ok{background:var(--good-bg);color:var(--good);border-color:transparent}
+.pill.warn{background:var(--warn-bg);color:var(--warn);border-color:transparent}
+.pill.bad{background:var(--bad-bg);color:var(--bad);border-color:transparent}
+.pill.propio{background:var(--info-bg);color:var(--info);border-color:transparent}
+.muted{color:var(--muted)}
+.empty{padding:28px 18px;text-align:center;color:var(--muted);font-size:14px}
+
+/* ===== Alertas ===== */
+.alerts{display:flex;flex-direction:column;gap:8px;padding:14px 18px}
+.alert{display:flex;align-items:center;gap:10px;font-size:14px;padding:10px 12px;border-radius:var(--r-ctrl);border:1px solid var(--border)}
+.alert.warn{background:var(--warn-bg);border-color:transparent}
+.alert.info{background:var(--info-bg);border-color:transparent}
+.alert .tag{margin-left:auto;font-size:12px;font-weight:700}
+
+/* ===== Stepper (Nueva OS) ===== */
+.stepper{display:flex;flex-direction:column;gap:0;margin-top:10px}
+.stepper .s{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--sep)}
+.stepper .s:last-child{border-bottom:0}
+.stepper .n{flex:0 0 30px;height:30px;border-radius:50%;background:var(--accent-bg);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.stepper .s .t{font-weight:600}
+.stepper .s .dz{color:var(--muted);font-size:13px;margin-top:2px}
+.dropzone{border:2px dashed var(--border);border-radius:var(--r-card);padding:34px;text-align:center;color:var(--muted);background:var(--surface-2);margin-top:12px}
+.dropzone .big{font-size:34px}
+
+/* ===== Calendario (vista de mes) ===== */
+.cal-wrap{overflow-x:auto;margin-top:6px}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(104px,1fr));border:1px solid var(--sep);border-radius:var(--r-card);overflow:hidden;min-width:760px;background:var(--surface)}
+.cal .dow{background:var(--surface-2);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--sep)}
+.cal .cell{min-height:92px;border-right:1px solid var(--sep);border-bottom:1px solid var(--sep);padding:6px 8px;position:relative}
+.cal .cell:nth-child(7n){border-right:0}
+.cal .cell.empty{background:var(--surface-2)}
+.cal .num{font-size:12px;font-weight:700;color:var(--faint)}
+.cal .ev{margin-top:4px;border-radius:8px;padding:5px 7px;border:1px solid transparent;font-size:11px;line-height:1.25}
+.cal .ev.c-total{background:var(--bad-bg);color:var(--bad)}
+.cal .ev.c-noche{background:var(--warn-bg);color:var(--warn)}
+.cal .ev.c-sin_cierre{background:var(--good-bg);color:var(--good)}
+.cal .ev.c-reservas21{background:var(--info-bg);color:var(--info)}
+.cal .ev .cli{font-weight:700;display:block}
+.cal .ev .mt{opacity:.85}
+.cal .ev .tt{font-style:italic;opacity:.8}
+
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.legend .l{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.legend .sw{width:12px;height:12px;border-radius:4px}
+.sw.c-total{background:var(--bad)}.sw.c-noche{background:var(--warn)}.sw.c-sin_cierre{background:var(--good)}.sw.c-reservas21{background:var(--info)}
