@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Salidas de extracción del BDM (datos de negocio: precios/recetas)
+supabase/extract/out/*.csv
+supabase/extract/out/*.json
+!supabase/extract/out/manifest.json

@@ -1,0 +1,69 @@
+{
+  "fuente": "MaymantaBDM_escandallos_BCN_IBZ.xlsx",
+  "generado": "2026-11-19T15:31:48",
+  "tablas": [
+    {
+      "hoja": "Materias primas",
+      "salida": "materias_primas",
+      "filas": 990,
+      "columnas": 10,
+      "destino_bd": "products (materias primas) + supplier_prices"
+    },
+    {
+      "hoja": "Maestro Productos",
+      "salida": "maestro_productos",
+      "filas": 2928,
+      "columnas": 21,
+      "destino_bd": "products + suppliers"
+    },
+    {
+      "hoja": "Producciones",
+      "salida": "producciones",
+      "filas": 328,
+      "columnas": 10,
+      "destino_bd": "recipes (type=produccion)"
+    },
+    {
+      "hoja": "Recetas de producción",
+      "salida": "recetas_items",
+      "filas": 2065,
+      "columnas": 8,
+      "destino_bd": "recipe_items (BOM)"
+    },
+    {
+      "hoja": "Transformaciones",
+      "salida": "transformaciones",
+      "filas": 1094,
+      "columnas": 12,
+      "destino_bd": "recipes (type=transformacion) + yields"
+    },
+    {
+      "hoja": "Escandallo de carta",
+      "salida": "escandallo_carta",
+      "filas": 763,
+      "columnas": 6,
+      "destino_bd": "dishes + dish_components"
+    },
+    {
+      "hoja": "Historial Precios",
+      "salida": "historial_precios",
+      "filas": 0,
+      "columnas": 9,
+      "destino_bd": "supplier_prices (histórico)"
+    },
+    {
+      "hoja": "Rendimientos",
+      "salida": "rendimientos",
+      "filas": 9,
+      "columnas": 14,
+      "destino_bd": "yields"
+    },
+    {
+      "hoja": "List Auxiliar",
+      "salida": "list_auxiliar",
+      "filas": 1420,
+      "columnas": 4,
+      "destino_bd": "products / product_aliases (diccionario)"
+    }
+  ]
+}
