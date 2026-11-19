@@ -1,10 +1,29 @@
 -- =====================================================
--- MAYMANTA OS - TODO EN UNO
+-- MAYMANTA OS - TODO EN UNO (re-ejecutable)
 -- Pega este archivo completo en el SQL Editor de Supabase y pulsa RUN.
--- Incluye las 7 migraciones (en orden) + el seed.
+-- Incluye: limpieza + 7 migraciones (en orden) + seed.
 -- Generado automaticamente; no editar a mano.
 -- =====================================================
 
+-- >>>>>>>>>> LIMPIEZA (idempotente) >>>>>>>>>>
+-- Borra las tablas MAYMANTA si ya existen, para poder re-ejecutar sin el error
+-- "already exists". OJO: borra los datos de estas tablas. Mientras no haya datos
+-- reales cargados es totalmente seguro. (Quitar este bloque cuando haya datos.)
+drop table if exists
+  public.audit_logs, public.approvals, public.documents, public.food_cost_periods,
+  public.sales, public.abc_classification, public.kardex_movements, public.inventory_lines,
+  public.inventory_counts, public.purchases_history, public.purchase_lines, public.purchase_orders,
+  public.production_lines, public.production_orders, public.event_lines, public.events,
+  public.rules, public.menu_engineering, public.cocktail_items, public.cocktails,
+  public.dish_components, public.dishes, public.recipe_items, public.recipes,
+  public.yields, public.supplier_prices, public.suppliers, public.product_aliases,
+  public.products, public.user_center_roles, public.permissions, public.roles,
+  public.users, public.centers
+  cascade;
+drop function if exists public.has_permission(text,text,uuid);
+drop function if exists public.current_center_ids();
+drop function if exists public.tg_set_updated_at();
+drop function if exists public.tg_audit();
 
 
 -- >>>>>>>>>> migrations/0001_core.sql >>>>>>>>>>
