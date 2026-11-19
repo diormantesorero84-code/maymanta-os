@@ -47,3 +47,6 @@ supabase/extract/out/*.json
 
 # permitir el ejemplo de entorno (las claves reales van en .env.local, ignorado)
 !.env.example
+
+# SQL de carga generado (lleva precios/recetas): no versionar
+supabase/load_bdm.sql
