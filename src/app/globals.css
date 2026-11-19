@@ -166,3 +166,25 @@ tbody tr:hover{background:var(--surface-2)}
 .legend .l{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
 .legend .sw{width:12px;height:12px;border-radius:4px}
 .sw.c-total{background:var(--bad)}.sw.c-noche{background:var(--warn)}.sw.c-sin_cierre{background:var(--good)}.sw.c-reservas21{background:var(--info)}
+
+/* ===== Login ===== */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);padding:20px}
+.login-card{background:var(--surface);border:1px solid var(--sep);border-radius:18px;padding:30px 28px;width:100%;max-width:380px;box-shadow:0 10px 40px rgba(0,0,0,.08)}
+.login-card .brand{justify-content:center;padding:0 0 18px;font-size:20px}
+.login-card h2{margin:0 0 4px;font-size:18px;text-align:center}
+.login-card p.hint{margin:0 0 20px;color:var(--muted);font-size:13px;text-align:center}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.field label{font-size:12px;font-weight:600;color:var(--muted)}
+.field input{border:1px solid var(--border);background:var(--surface-2);border-radius:var(--r-ctrl);padding:11px 13px;font-size:14px;color:var(--fg);outline:0}
+.field input:focus{border-color:var(--accent)}
+.login-card .btn{width:100%;justify-content:center;padding:11px;font-size:15px;margin-top:4px}
+.login-err{background:var(--bad-bg);color:var(--bad);border-radius:var(--r-ctrl);padding:9px 12px;font-size:13px;margin-bottom:12px;text-align:center}
+
+/* ===== badge conexión en topbar / logout ===== */
+.conn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--good);background:var(--good-bg);padding:4px 9px;border-radius:999px}
+.conn .d{width:7px;height:7px;border-radius:50%;background:var(--good)}
+.logout{border:1px solid var(--border);background:var(--surface-2);color:var(--muted);border-radius:var(--r-ctrl);padding:6px 10px;font-size:12px;font-weight:600;cursor:pointer}
+.logout:hover{color:var(--fg)}
+.cost-ok{color:var(--good);font-weight:600}
+.cost-rev{color:var(--warn);font-weight:600}
+@media (max-width:620px){.hide-sm{display:none}}

@@ -15,6 +15,6 @@ export const NAV: NavItem[] = [
   { href: "/compras", label: "Compras", ico: "▤", soon: true, section: "Operación" },
   { href: "/food-cost", label: "Food Cost %FC", ico: "◉", soon: true, section: "Datos" },
   { href: "/kardex", label: "Kardex / Inventario", ico: "▦", soon: true, section: "Datos" },
-  { href: "/bdm", label: "BDM / Escandallos", ico: "▧", soon: true, section: "Datos" },
+  { href: "/bdm", label: "BDM / Escandallos", ico: "▧", section: "Datos" },
   { href: "/auditoria", label: "Auditoría", ico: "◎", soon: true, section: "Sistema" },
 ];

@@ -1,9 +1,12 @@
 "use client";
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { Session } from "@supabase/supabase-js";
 import { SEDES, SedeId, nombreSede } from "@/lib/sedes";
 import { NAV } from "@/lib/nav";
+import { supabase, supabaseConfigured } from "@/lib/supabase";
+import LoginScreen from "@/components/LoginScreen";
 
 // ---- Contexto de sede (selector global) ----
 const SedeCtx = createContext<{ sede: SedeId; setSede: (s: SedeId) => void }>({
@@ -15,8 +18,32 @@ export const useSede = () => useContext(SedeCtx);
 export default function AppShell({ children }: { children: ReactNode }) {
   const [sede, setSede] = useState<SedeId>("BCN");
   const [open, setOpen] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
+  const [authLoading, setAuthLoading] = useState<boolean>(supabaseConfigured);
   const pathname = usePathname();
   const sections = ["Operación", "Datos", "Sistema"] as const;
+
+  useEffect(() => {
+    if (!supabaseConfigured || !supabase) {
+      setAuthLoading(false);
+      return;
+    }
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session);
+      setAuthLoading(false);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
+  if (supabaseConfigured && authLoading) {
+    return <div className="login-wrap"><div className="muted">Cargando…</div></div>;
+  }
+  if (supabaseConfigured && !session) {
+    return <LoginScreen />;
+  }
+
+  const email = session?.user?.email ?? "";
 
   return (
     <SedeCtx.Provider value={{ sede, setSede }}>
@@ -57,8 +84,18 @@ export default function AppShell({ children }: { children: ReactNode }) {
               ))}
             </div>
             <div className="user">
-              <span style={{ color: "var(--muted)" }}>{nombreSede(sede)}</span>
-              <span className="avatar">M</span>
+              {supabaseConfigured ? (
+                <>
+                  <span className="conn"><span className="d" /> Conectado</span>
+                  {email && <span style={{ color: "var(--muted)" }} className="hide-sm">{email}</span>}
+                  <button className="logout" onClick={() => supabase?.auth.signOut()}>Salir</button>
+                </>
+              ) : (
+                <>
+                  <span style={{ color: "var(--muted)" }}>{nombreSede(sede)}</span>
+                  <span className="avatar">M</span>
+                </>
+              )}
             </div>
           </header>
           <main className="content">{children}</main>
