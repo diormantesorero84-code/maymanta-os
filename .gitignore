@@ -44,3 +44,6 @@ next-env.d.ts
 supabase/extract/out/*.csv
 supabase/extract/out/*.json
 !supabase/extract/out/manifest.json
+
+# permitir el ejemplo de entorno (las claves reales van en .env.local, ignorado)
+!.env.example
